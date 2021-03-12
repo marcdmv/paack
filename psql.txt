@@ -1,0 +1,45 @@
+CREATE TABLE orders
+	(id INTEGER,
+	 paack_order_number INTEGER,
+	 driver_id INTEGER,
+	 deliver_date DATE,
+	 delivery_start timestamp,
+	 delivery_end timestamp,
+	 attempted_time timestamp,
+	 order_status VARCHAR,
+	 country VARCHAR,
+	 company VARCHAR);
+
+
+COPY orders
+FROM '/Users/marcdemas/Downloads/paack/orders_table.csv'
+DELIMITER ',' CSV HEADER;
+
+
+SELECT * FROM orders;
+
+CREATE TABLE drivers
+	(id INTEGER,
+	 driver VARCHAR,
+	 invoice_details VARCHAR,
+	 vehicle VARCHAR);
+
+COPY drivers
+FROM '/Users/marcdemas/Downloads/paack/drivers_table.csv'
+DELIMITER ',' CSV HEADER;
+
+CREATE TABLE drivers_summary
+	(driver VARCHAR,
+	 parcels_delivered INTEGER,
+	 orders_delivered INTEGER,
+	 orders_failed INTEGER,
+	 orders_attempted INTEGER,
+	 orders_to_deliver INTEGER,
+	 orders_delayed INTEGER,
+	 orders_early INTEGER,
+	 start_time VARCHAR,
+	 end_time_last_delivery_attempt VARCHAR);
+
+COPY drivers_summary
+FROM '/Users/marcdemas/Downloads/paack/drivers_summary.csv'
+DELIMITER ';' CSV HEADER;
